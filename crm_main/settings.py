@@ -16,16 +16,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!*ndp-(t$)0cgpl!q4bh^t^o%&*z8!=&g-*e+bocov1h#5zsux'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -109,16 +99,7 @@ WSGI_APPLICATION = 'crm_main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'NewDb',
-        'USER': 'postgres',
-        'PASSWORD': '1234567',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    }
-}
+
 
 CHANNEL_LAYERS = {
     'default': {
@@ -184,10 +165,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-os.path.join(BASE_DIR, 'static'),
-)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Media Files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -215,3 +193,8 @@ MESSAGE_TAGS = {
 
 # SOCIAL_AUTH_FACEBOOK_KEY = '565284834205523'  # App ID
 # SOCIAL_AUTH_FACEBOOK_SECRET = 'c6b12784c9589a0b3bdfe33114a19688'  # App Secret
+
+try:
+    from .local_settings import *
+except ImportError:
+    from .prod_settings import *
